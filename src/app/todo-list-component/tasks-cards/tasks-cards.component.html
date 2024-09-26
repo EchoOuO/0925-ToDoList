@@ -1,0 +1,34 @@
+<!-- add tasks -->
+<div class="add-task-form">
+  <app-add-task [tasks]="tasks"></app-add-task>
+</div>
+
+<hr />
+
+<!-- tasks filter -->
+<div class="filter">
+  <label>Status Filter: </label>
+  <select name="status" id="" (change)="onFilterChange($event)">
+    <option value="All">All</option>
+    <option value="Done">Done</option>
+    <option value="Pending">Pending</option>
+  </select>
+  <div *ngFor="let type of filterType">
+    <p
+      class="filter-type"
+      [ngClass]="{
+        'filter-type-done': type === 'Done',
+        'filter-type-pending': type === 'Pending'
+      }"
+    >
+      {{ type }}
+    </p>
+  </div>
+</div>
+
+<!-- display tasks -->
+<div class="cards">
+  <div *ngFor="let task of filteredTasks; let i = index">
+    <app-card [tasks]="tasks" [task]="task" [index]="i"></app-card>
+  </div>
+</div>

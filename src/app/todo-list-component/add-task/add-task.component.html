@@ -1,0 +1,23 @@
+<form #formData="ngForm" class="add-task-form" (ngSubmit)="onSubmit(formData)">
+  <p class="hint">* is required</p>
+
+  <div>
+    <label>* Title: </label>
+    <input
+      name="title"
+      placeholder="Title (To-do)"
+      [(ngModel)]="addedTask.title"
+      required
+    />
+  </div>
+
+  <div class="status-container">
+    <label>* Status:</label>
+    <select name="status" id="" [(ngModel)]="addedTask.status" required>
+      <option value="done">Done</option>
+      <option value="pending">Pending</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="formData.invalid">Add Task</button>
+</form>
