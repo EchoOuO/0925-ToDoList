@@ -1,5 +1,9 @@
 .wrapper {
   height: auto;
-  width: 100%;
+  width: 80%;
   margin-bottom: 30px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 600px;
 }

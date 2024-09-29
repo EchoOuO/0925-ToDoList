@@ -14,10 +14,12 @@
   <div class="status-container">
     <label>* Status:</label>
     <select name="status" id="" [(ngModel)]="addedTask.status" required>
-      <option value="done">Done</option>
-      <option value="pending">Pending</option>
+      <option value="Done">Done</option>
+      <option value="Pending">Pending</option>
     </select>
   </div>
 
-  <button type="submit" [disabled]="formData.invalid">Add Task</button>
+  <button type="submit" [disabled]="formData.invalid" class="add-task-btn">
+    Add Task
+  </button>
 </form>

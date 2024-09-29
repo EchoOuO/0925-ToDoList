@@ -1,21 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksCardsComponent } from './tasks-cards/tasks-cards.component';
 import { Tasks } from '../../../type';
 import { FormsModule } from '@angular/forms';
+import { v4 as uuidv4 } from 'uuid';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-list-component',
   standalone: true,
-  imports: [TasksCardsComponent, FormsModule],
+  imports: [TasksCardsComponent, FormsModule, HttpClientModule],
   templateUrl: './todo-list-component.component.html',
   styleUrl: './todo-list-component.component.scss',
 })
 export class TodoListComponentComponent {
-  public tasks: Tasks[] = [
-    { id: 1, title: 'Buy groceries', status: 'Done' },
-    { id: 2, title: 'Finish Angular project', status: 'Done' },
-    { id: 3, title: 'Call mom', status: 'Done' },
-    { id: 4, title: 'Exercise for 30 minutes', status: 'Done' },
-    { id: 5, title: 'Read a book', status: 'Pending' },
-  ];
+  constructor(private http: HttpClient) {}
+
+  public tasks: Tasks[] = [];
+
+  ngOnInit() {
+    // For local file (assets/data/tasks.json)
+    // this.http.get<any>('assets/data/tasks.json').subscribe((data) => {
+    //   if (!data) {
+    //     return;
+    //   }
+    //   this.tasks = data.tasks;
+    // });
+
+    // For sesstionStorage
+    const tempData = sessionStorage.getItem('tasks');
+    if (!tempData) {
+      return;
+    }
+    this.tasks = JSON.parse(tempData);
+  }
 }

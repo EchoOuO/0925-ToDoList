@@ -26,9 +26,18 @@
   </div>
 </div>
 
+<div class="deleteAll">
+  <button (click)="confirmDeleteAll()" class="deleteAll-btn">
+    Delete all tasks
+  </button>
+</div>
+
 <!-- display tasks -->
 <div class="cards">
   <div *ngFor="let task of filteredTasks; let i = index">
     <app-card [tasks]="tasks" [task]="task" [index]="i"></app-card>
   </div>
+  <p class="message" *ngIf="filteredTasks.length === 0">
+    Nothing on refrigerator door :)
+  </p>
 </div>

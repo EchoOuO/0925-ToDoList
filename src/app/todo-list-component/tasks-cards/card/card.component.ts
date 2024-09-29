@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Tasks } from '../../../../../type';
-import { MessageModalComponent } from '../../../message-modal/message-modal.component';
+import { MessageModalComponent } from '../../../components/message-modal/message-modal.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -14,7 +14,7 @@ export class CardComponent {
   constructor(public dialog: MatDialog) {}
 
   @Input() tasks!: Tasks[];
-  @Input() task!: Tasks;
+  @Input() task!: Tasks; // From filteredTasks
   @Input() index!: number;
 
   confirmDelete(index: number): void {
@@ -30,6 +30,11 @@ export class CardComponent {
   }
 
   deleteTask(index: number): void {
+    console.log('Task has been deleted: ', this.tasks[index]);
+
     this.tasks.splice(index, 1);
+    sessionStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
+
+  editTask(): void {}
 }
